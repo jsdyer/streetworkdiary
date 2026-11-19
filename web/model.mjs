@@ -1,7 +1,4 @@
-// Keep transformations separate from the DOM so they can be tested directly.
-export function cleanLines(text) {
-  if (typeof text !== 'string') throw new TypeError('Expected text');
-  const lines = text.split(/\r\n|\r|\n/).map(line => line.trim()).filter(Boolean);
-  const unique = [...new Set(lines)];
-  return { text: unique.join('\n'), count: unique.length, removed: lines.length - unique.length };
+export function median(values){const s=values.filter(Number.isFinite).sort((a,b)=>a-b);return s.length?(s[Math.floor((s.length-1)/2)]+s[Math.floor(s.length/2)])/2:null}
+export function counts(rows){
+  const closed=rows.filter(r=>r[4]==='CLOSED');return {total:rows.length,closed:closed.length,detail:rows.filter(r=>r[7].length).length,resolution:rows.filter(r=>r[6]).length,elapsed:median(closed.map(r=>r[5]))};
 }

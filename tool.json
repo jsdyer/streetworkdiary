@@ -1,16 +1,37 @@
 {
-  "id": "coolcode-tool-template",
-  "title": "CoolCode Tool Starter",
-  "description": "A browser-only example that trims lines and removes exact duplicates.",
-  "category": "security",
-  "tags": ["text", "lines", "duplicates"],
-  "icon": "scan-search",
-  "url": "/coolcode-tool-template/",
-  "source": "https://github.com/jsdyer/coolcode-tool-template",
+  "id": "streetworkdiary",
+  "title": "Streetwork Diary",
+  "description": "Compare Halifax street-service requests, closures and published resolution fields by community and week.",
+  "category": "places",
+  "tags": [
+    "halifax",
+    "municipal",
+    "streets",
+    "service requests"
+  ],
+  "icon": "map",
+  "url": "/streetworkdiary/",
+  "source": "https://github.com/jsdyer/streetworkdiary",
   "hosting": "project",
   "access": "browser",
   "data_info": {
-    "mode": "local",
-    "detail": "The browser reads the text you paste and compares its lines."
+    "mode": "snapshot",
+    "detail": "Halifax Cityworks intake records joined to published custom-field names for two reporting weeks.",
+    "cadence": "Weekly",
+    "probes": [
+      {
+        "label": "Cityworks data retrieved",
+        "url": "https://coolcode.ca/streetworkdiary/data/requests.json",
+        "path": [
+          "retrieved"
+        ],
+        "count_at": {
+          "path": [
+            "count"
+          ],
+          "unit": "requests"
+        }
+      }
+    ]
   }
 }

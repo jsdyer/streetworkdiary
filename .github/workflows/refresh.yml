@@ -1,0 +1,37 @@
+name: Refresh municipal data
+on:
+  schedule:
+    - cron: '38 9 * * 3'
+  workflow_dispatch:
+permissions:
+  contents: write
+  actions: write
+concurrency:
+  group: refresh-municipal-data
+  cancel-in-progress: false
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          ref: main
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+      - run: python3 scripts/refresh.py
+      - run: python3 scripts/build.py
+      - run: node --test tests/*.test.mjs
+      - name: Commit the checked snapshot
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          git add web/data/
+          if ! git diff --cached --quiet; then
+            git config user.name 'github-actions[bot]'
+            git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+            git commit -m 'Refresh Halifax open-data snapshot'
+            git push origin HEAD:main
+          fi
+          gh workflow run pages.yml --ref main
