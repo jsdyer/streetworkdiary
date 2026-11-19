@@ -28,6 +28,6 @@ export function communityMap(geometry, selectCommunity) {
     const status = document.getElementById('map-summary');
     status.textContent = mapped + ' of ' + total + ' selected requests mapped across ' + communities +
       (communities === 1 ? ' community.' : ' communities.') +
-      (total > mapped ? ' ' + (total-mapped) + ' lack a matching named boundary.' : '');
+      (total > mapped ? ' ' + (total-mapped) + (total-mapped === 1 ? ' request has' : ' requests have') + ' no matching named boundary.' : '');
   };
 }
