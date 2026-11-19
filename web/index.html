@@ -1,1 +1,131 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>{{TITLE}} · CoolCode</title><meta name="description" content="{{DESCRIPTION}}"><link rel="canonical" href="https://coolcode.ca/{{TOOL_ID}}/"><link rel="stylesheet" href="./style.css"><script type="module" src="./app.mjs"></script></head><body><header><a href="https://coolcode.ca/">CoolCode</a><a href="{{SOURCE_URL}}">Source &amp; README</a></header><main><div class="intro"><h1>{{TITLE}}</h1><p>Follow Halifax street-surface, litter and graffiti requests from intake to closure. See where the city published a resolution or additional fields.</p><p class="meta" id="meta" role="status">Loading the municipal records…</p></div><section id="work" hidden><div class="controls"><label>Intake week<select id="week"></select></label><label>Request type<select id="type"></select></label><label>Community<select id="area"></select></label></div><div id="stats" class="cards" aria-live="polite"></div><section class="panel"><h2>What the city recorded</h2><p id="coverage"></p><div class="scroll"><table><thead><tr><th>Community</th><th>Requests</th><th>Closed</th><th>With resolution</th><th>With detail</th></tr></thead><tbody id="summary"></tbody></table></div></section><section class="panel"><details><summary>Individual request records</summary><div class="scroll"><table><thead><tr><th>Request</th><th>Opened</th><th>Community</th><th>Type</th><th>Status</th><th>Published detail fields</th></tr></thead><tbody id="rows"></tbody></table></div></details><p><button id="csv">Download selection</button></p></section></section><section class="panel"><details><summary>Sources and interpretation</summary><p>The <a href="https://www.arcgis.com/home/item.html?id=d2b7dd138adb468293183926a1a7a81c">Halifax Cityworks service-request table</a> records administrative status, closure dates and resolution fields. The <a href="https://www.arcgis.com/home/item.html?id=81703e2cda974ffb8d4ba1f313d18429">custom-fields table</a> supplies additional fields for some requests. Requests are counted once by ID, including those with no matching detail row. A closed request can represent a referral or other administrative action. These records alone do not verify a completed repair.</p><p>The archive comparison uses the week beginning April 1, 2025 and the latest complete Monday–Sunday week before the newest published request. It includes street-surface maintenance, right-of-way litter and graffiti categories. Dates and boundaries use the published UTC timestamps. Elapsed time uses valid date pairs. A populated resolution field means text was provided. Addresses, resolution text and other free text are omitted from this snapshot. <a href="https://data-hrm.hub.arcgis.com/pages/open-data-licence">HRM Open Data Licence</a>.</p></details></section></main><footer>Halifax Regional Municipality open data · An independent CoolCode tool</footer></body></html>
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>{{TITLE}} · CoolCode</title>
+    <meta name="description" content="{{DESCRIPTION}}" />
+    <link rel="canonical" href="https://coolcode.ca/{{TOOL_ID}}/" />
+    <link rel="stylesheet" href="./style.css" />
+    <script type="module" src="./app.mjs"></script>
+  </head>
+  <body>
+    <header>
+      <a href="https://coolcode.ca/">CoolCode</a
+      ><a href="{{SOURCE_URL}}">Source &amp; README</a>
+    </header>
+    <main>
+      <div class="intro">
+        <h1>{{TITLE}}</h1>
+        <p>
+          Follow Halifax street-surface, litter and graffiti requests from
+          intake to closure. See where the city published a resolution or
+          additional fields.
+        </p>
+        <p class="meta" id="meta" role="status">
+          Loading the municipal records…
+        </p>
+      </div>
+      <section id="work" hidden>
+        <div class="controls">
+          <label>Intake week<select id="week"></select></label
+          ><label>Request type<select id="type"></select></label
+          ><label>Community<select id="area"></select></label>
+        </div>
+        <div id="stats" class="cards" aria-live="polite"></div>
+        <section class="panel">
+          <h2>What the city recorded</h2>
+          <p id="coverage"></p>
+          <div class="scroll">
+            <table>
+              <thead>
+                <tr>
+                  <th>Community</th>
+                  <th>Requests</th>
+                  <th>Closed</th>
+                  <th>With resolution</th>
+                  <th>With detail</th>
+                </tr>
+              </thead>
+              <tbody id="summary"></tbody>
+            </table>
+          </div>
+        </section>
+        <section class="panel">
+          <h2>Reported litter issues</h2>
+          <p id="issue-coverage"></p>
+          <div class="scroll" id="issue-table">
+            <table>
+              <thead>
+                <tr>
+                  <th>Published issue category</th>
+                  <th>Requests</th>
+                </tr>
+              </thead>
+              <tbody id="issues"></tbody>
+            </table>
+          </div>
+        </section>
+        <section class="panel">
+          <details>
+            <summary>Individual request records</summary>
+            <div class="scroll">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Request</th>
+                    <th>Opened</th>
+                    <th>Community</th>
+                    <th>Type</th>
+                    <th>Status</th>
+                    <th>Published detail fields</th>
+                    <th>Reported litter issue</th>
+                  </tr>
+                </thead>
+                <tbody id="rows"></tbody>
+              </table>
+            </div>
+          </details>
+          <p><button id="csv">Download selection</button></p>
+        </section>
+      </section>
+      <section class="panel">
+        <details>
+          <summary>Sources and interpretation</summary>
+          <p>
+            The
+            <a
+              href="https://www.arcgis.com/home/item.html?id=d2b7dd138adb468293183926a1a7a81c"
+              >Halifax Cityworks service-request table</a
+            >
+            records administrative status, closure dates and resolution fields.
+            The
+            <a
+              href="https://www.arcgis.com/home/item.html?id=81703e2cda974ffb8d4ba1f313d18429"
+              >custom-fields table</a
+            >
+            supplies additional fields for some requests. Requests are counted
+            once by ID, including those with no matching detail row. A closed
+            request can represent a referral or other administrative action.
+            These records alone do not verify a completed repair.
+          </p>
+          <p>
+            The archive comparison uses the week beginning April 1, 2025 and the
+            latest complete Monday–Sunday week before the newest published
+            request. It includes street-surface maintenance, right-of-way litter
+            and graffiti categories. Dates and boundaries use the published UTC
+            timestamps. Elapsed time uses valid date pairs. A populated
+            resolution field means text was provided. Addresses, resolution text
+            and other free text are omitted from this snapshot.
+            <a href="https://data-hrm.hub.arcgis.com/pages/open-data-licence"
+              >HRM Open Data Licence</a
+            >.
+          </p>
+        </details>
+      </section>
+    </main>
+    <footer>
+      Halifax Regional Municipality open data · An independent CoolCode tool
+    </footer>
+  </body>
+</html>

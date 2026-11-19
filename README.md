@@ -6,6 +6,8 @@
 Start with street-surface requests for April 1–7, 2025. Compare closed counts, published resolution coverage and custom-field coverage, then switch to another request type.
 <!-- /coolcode:guide -->
 
+The litter issue breakdown counts each request once per recognized municipal category. Only known labels from “Type of Litter/Issue” are included. The number of matching custom rows can therefore exceed the number with a displayed issue.
+
 ## Sources and interpretation
 
 <p>The <a href="https://www.arcgis.com/home/item.html?id=d2b7dd138adb468293183926a1a7a81c">Halifax Cityworks service-request table</a> records administrative status, closure dates and resolution fields. The <a href="https://www.arcgis.com/home/item.html?id=81703e2cda974ffb8d4ba1f313d18429">custom-fields table</a> supplies additional fields for some requests. Requests are counted once by ID, including those with no matching detail row. A closed request can represent a referral or other administrative action. These records alone do not verify a completed repair.</p><p>The archive comparison uses the week beginning April 1, 2025 and the latest complete Monday–Sunday week before the newest published request. It includes street-surface maintenance, right-of-way litter and graffiti categories. Dates and boundaries use the published UTC timestamps. Elapsed time uses valid date pairs. A populated resolution field means text was provided. Addresses, resolution text and other free text are omitted from this snapshot. <a href="https://data-hrm.hub.arcgis.com/pages/open-data-licence">HRM Open Data Licence</a>.</p>
