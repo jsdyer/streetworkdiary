@@ -6,7 +6,7 @@
     <title>{{TITLE}} · CoolCode</title>
     <meta name="description" content="{{DESCRIPTION}}" />
     <link rel="canonical" href="https://coolcode.ca/{{TOOL_ID}}/" />
-    <link rel="stylesheet" href="./style.css" />
+    <link rel="stylesheet" href="./vendor/leaflet.css"><script defer src="./vendor/leaflet.js"></script><link rel="stylesheet" href="./style.css" />
     <script type="module" src="./app.mjs"></script>
   </head>
   <body>
@@ -32,6 +32,13 @@
           ><label>Request type<select id="type"></select></label
           ><label>Community<select id="area"></select></label>
         </div>
+        <section class="panel" aria-labelledby="map-heading">
+          <h2 id="map-heading">Requests by community</h2>
+          <p>Choose an area on the map or use the community menu. Shading shows requests within the municipal boundary.</p>
+          <div id="community-map" class="record-map" role="region" aria-label="Interactive map of request totals by Halifax community"></div><div id="tile-notice" role="status" hidden>Some street-map tiles could not load. <button type="button" id="retry-tiles">Retry street map</button></div>
+          <div class="count-key" aria-label="Request totals"><span>1–5</span><span>6–20</span><span>21 or more</span></div>
+          <div class="map-tools"><button type="button" id="all-communities">Show all communities</button><p id="map-summary" role="status"></p></div>
+        </section>
         <div id="stats" class="cards" aria-live="polite"></div>
         <section class="panel">
           <h2>What the city recorded</h2>
@@ -115,7 +122,7 @@
             request. It includes street-surface maintenance, right-of-way litter
             and graffiti categories. Dates and boundaries use the published UTC
             timestamps. Elapsed time uses valid date pairs. A populated
-            resolution field means text was provided. Addresses, resolution text
+            resolution field means text was provided. The map matches community names to <a href="https://services2.arcgis.com/11XBiaBYA9Ep0yNJ/arcgis/rest/services/GSA/FeatureServer/0">HRM community boundaries</a>. OpenStreetMap supplies street tiles for the area on screen. Addresses, resolution text
             and other free text are omitted from this snapshot.
             <a href="https://data-hrm.hub.arcgis.com/pages/open-data-licence"
               >HRM Open Data Licence</a

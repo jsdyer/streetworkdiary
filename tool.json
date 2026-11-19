@@ -1,7 +1,7 @@
 {
   "id": "streetworkdiary",
   "title": "Streetwork Diary",
-  "description": "Compare Halifax street-service requests, closures and published resolution fields by community and week.",
+  "description": "Map Halifax street-service requests by community and compare closures and published resolution fields across two weeks.",
   "category": "places",
   "tags": [
     "halifax",
@@ -16,7 +16,7 @@
   "access": "browser",
   "data_info": {
     "mode": "snapshot",
-    "detail": "Halifax Cityworks intake records joined to published custom-field names for two reporting weeks.",
+    "detail": "Cityworks request counts are mapped to Halifax’s published community boundaries and joined to municipal custom-field records.",
     "cadence": "Weekly",
     "probes": [
       {

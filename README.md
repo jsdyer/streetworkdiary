@@ -3,7 +3,7 @@
 [Open Streetwork Diary](https://coolcode.ca/streetworkdiary/). Explore two Halifax Cityworks reporting weeks.
 
 <!-- coolcode:guide -->
-Start with street-surface requests for April 1–7, 2025. Compare closed counts, published resolution coverage and custom-field coverage, then switch to another request type.
+Choose a shaded community to filter the records for that area. Start with street-surface requests for April 1–7, 2025. Compare closed counts, published resolution coverage and custom-field coverage, then switch to another request type.
 <!-- /coolcode:guide -->
 
 The litter issue breakdown counts each request once per recognized municipal category. Only known labels from “Type of Litter/Issue” are included. The number of matching custom rows can therefore exceed the number with a displayed issue.
@@ -14,4 +14,4 @@ The litter issue breakdown counts each request once per recognized municipal cat
 
 ## Maintaining the tool
 
-The published app reads its bundled JSON without contacting the municipality. A scheduled GitHub Action runs the collector, validates the result, and rebuilds Pages when the snapshot changes. Run `python3 scripts/refresh.py`, `node --test tests/*.test.mjs`, `python3 -m unittest discover -s tests`, then `python3 scripts/build.py`. Browser checks run against the built site at its repository subpath. The collector writes atomically after verifying complete ArcGIS ID batches.
+The map matches request community names to [published HRM community boundaries](https://services2.arcgis.com/11XBiaBYA9Ep0yNJ/arcgis/rest/services/GSA/FeatureServer/0) under the HRM Open Data Licence. Boundaries are generalized for display. Each polygon shows the selected week and category total. Requests lacking a matching community remain in the table and selection total. The map never assigns individual request locations. The published app reads its bundled JSON without contacting the municipality. OpenStreetMap receives street-tile requests for the displayed area. Leaflet is bundled under the licence in web/vendor. A scheduled GitHub Action runs the collector, validates the result, and rebuilds Pages when the snapshot changes. Run `python3 scripts/refresh.py`, `node --test tests/*.test.mjs`, `python3 -m unittest discover -s tests`, then `python3 scripts/build.py`. Browser checks run against the built site at its repository subpath. The collector writes atomically after verifying complete ArcGIS ID batches.

@@ -1,6 +1,7 @@
+import {communityMap} from './community-map.mjs';
 import { by, choices, cards, row, csv } from "./common.mjs";
 import { counts } from "./model.mjs";
-let data;
+let data, drawMap;
 function period() {
   return data.periods.find((p) => p.start === by("week").value);
 }
@@ -62,6 +63,8 @@ function render() {
     if (!grouped.has(r[2])) grouped.set(r[2], []);
     grouped.get(r[2]).push(r);
   }
+  drawMap(grouped);
+  by("all-communities").disabled = !by("area").value;
   by("summary").replaceChildren(
     ...[...grouped]
       .sort((a, b) => b[1].length - a[1].length || a[0].localeCompare(b[0]))
@@ -142,8 +145,11 @@ try {
   by("week").onchange = setTypes;
   by("type").onchange = setAreas;
   by("area").onchange = render;
-  setTypes();
   by("work").hidden = false;
+  const selectCommunity = name => { by("area").value = name; render(); };
+  drawMap = communityMap(data.communities || {}, selectCommunity);
+  by("all-communities").onclick = () => selectCommunity("");
+  setTypes();
 } catch {
   by("meta").textContent =
     "The request snapshot could not load. Open the source below or reload.";

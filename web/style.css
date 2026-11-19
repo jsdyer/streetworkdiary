@@ -168,3 +168,8 @@ p {
 section[hidden] {
   display: none;
 }
+
+#tile-notice{padding:.6rem .85rem;background:#fff3d7;color:#4d3511} #tile-notice button{font:inherit;margin:.2rem .5rem;padding:.25rem .65rem;cursor:pointer}
+
+.record-map{height:clamp(19rem,48vh,31rem);width:100%;isolation:isolate;background:#e9eeeb;border:1px solid #93aaa5}.record-map .leaflet-control-attribution{max-width:85vw;white-space:normal}.map-tools{display:flex;flex-wrap:wrap;align-items:center;gap:.6rem 1rem}.map-tools p{margin:.45rem 0}.map-tools button{padding:.45rem .7rem}
+.count-key{display:flex;flex-wrap:wrap;gap:.5rem 1.1rem;margin:.55rem 0}.count-key span{display:flex;align-items:center;gap:.35rem}.count-key span::before{content:"";display:inline-block;width:1.15rem;height:.75rem;border:1px solid #154f52;background:#a6cfb5}.count-key span:nth-child(2)::before{background:#378981}.count-key span:nth-child(3)::before{background:#164d51}
