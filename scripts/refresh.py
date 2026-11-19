@@ -79,6 +79,30 @@ def window(start, end):
     }
 
 
+def community_boundaries(periods):
+    names = {row[2] for period in periods for row in period["rows"]}
+    # HRM publishes E911 community polygons. Request a generalized display edition.
+    data = query(
+        "GSA/FeatureServer/0", where="1=1", outFields="GSA_NAME",
+        returnGeometry="true", outSR=4326, maxAllowableOffset=0.0015,
+        geometryPrecision=4, f="geojson",
+    )
+    if data.get("exceededTransferLimit"):
+        raise ValueError("Incomplete community boundary edition")
+    polygons = {}
+    for feature in data["features"]:
+        name = feature["properties"]["GSA_NAME"]
+        if name not in names:
+            continue
+        shape = feature["geometry"]
+        if name in polygons or shape["type"] not in ("Polygon", "MultiPolygon") or not shape["coordinates"]:
+            raise ValueError("Review community polygons")
+        polygons[name] = shape
+    if not polygons:
+        raise ValueError("No request communities matched municipal boundaries")
+    return polygons
+
+
 def main():
     last = query(
         MAIN,
@@ -104,6 +128,7 @@ def main():
         count=sum(len(p["rows"]) for p in periods),
         sourceThrough=str(latest),
         periods=periods,
+        communities=community_boundaries(periods),
     )
 
 
