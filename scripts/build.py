@@ -8,6 +8,8 @@ import shutil
 import tempfile
 from urllib.parse import urlsplit
 
+from search_metadata import add_search_metadata
+
 ROOT = Path(__file__).resolve().parents[1]
 SLUG = re.compile(r"[a-z0-9]+(?:-[a-z0-9]+)*")
 
@@ -60,6 +62,7 @@ def build(root=ROOT):
             page = page.replace(placeholder, escape(tool[key], quote=True))
         if re.search(r"\{\{[A-Z_]+\}\}", page):
             raise ValueError("Unresolved template placeholder in web/index.html")
+        page = add_search_metadata(page, tool, category="ReferenceApplication")
         index.write_text(page, encoding="utf-8")
         (stage / ".nojekyll").touch()
         if output.exists():
