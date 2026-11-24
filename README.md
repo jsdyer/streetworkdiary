@@ -15,3 +15,11 @@ The litter issue breakdown counts each request once per recognized municipal cat
 ## Maintaining the tool
 
 The map matches request community names to [published HRM community boundaries](https://services2.arcgis.com/11XBiaBYA9Ep0yNJ/arcgis/rest/services/GSA/FeatureServer/0) under the HRM Open Data Licence. Boundaries are generalized for display. Each polygon shows the selected week and category total. Requests lacking a matching community remain in the table and selection total. The map never assigns individual request locations. The published app reads its bundled JSON without contacting the municipality. OpenStreetMap receives street-tile requests for the displayed area. Leaflet is bundled under the licence in web/vendor. A scheduled GitHub Action runs the collector, validates the result, and rebuilds Pages when the snapshot changes. Run `python3 scripts/refresh.py`, `node --test tests/*.test.mjs`, `python3 -m unittest discover -s tests`, then `python3 scripts/build.py`. Browser checks run against the built site at its repository subpath. The collector writes atomically after verifying complete ArcGIS ID batches.
+
+<!-- schedule-reliability -->
+## Schedule reliability
+
+Public GitHub repositories can have scheduled workflows disabled after 60 days of inactivity. A separate weekly [schedule guard](.github/workflows/schedule-guard.yml) calls GitHub's enable-workflow API for an explicit list of refresh workflows and itself. It can restore workflows disabled for inactivity, preserves manually disabled workflows, and runs independently of collection failures.
+
+This is an interim mitigation, not a scheduling guarantee: GitHub does not document active-workflow renewal as a permanent exemption, and scheduled runs can be delayed or dropped. A scheduler on our own Linux server is the planned independent trigger. The guard does not collect data, create dummy commits, or change source/check timestamps; successful collection and published data freshness still need monitoring.
+<!-- /schedule-reliability -->
